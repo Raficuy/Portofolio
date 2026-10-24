@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paduka Rafi — Mekanik Motor & Bot WA Developer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            950: '#090b10',
+                            900: '#11141d',
+                            800: '#191d2b',
+                            700: '#252b3d'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #090b10;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Background Grid */
+        .bg-grid-pattern {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-card {
+            background: rgba(17, 20, 29, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-hover {
+            transition: all 0.25s ease;
+        }
+
+        .glass-card-hover:hover {
+            border-color: rgba(245, 158, 11, 0.35);
+            transform: translateY(-3px);
+        }
+
+        .glass-nav {
+            background: rgba(9, 11, 16, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090b10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #252b3d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+
+        /* Terminal Scrollbar */
+        .terminal-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .terminal-scroll::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.35);
+            border-radius: 3px;
+        }
+
+        /* Typing Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #f59e0b;
+            font-weight: bold;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-amber-500/30 selection:text-amber-300 relative">
+
+    <!-- Ambient Background Glow (Amber for Garage + Emerald for Terminal) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-36 -left-36 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/3 -right-36 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]"></div>
+        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-amber-600/5 rounded-full blur-[130px]"></div>
+        <div class="absolute inset-0 bg-grid-pattern opacity-70"></div>
+    </div>
+
+    <!-- Sticky Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-emerald-500 p-[1px] shadow-lg shadow-amber-500/15">
+                        <div class="w-full h-full bg-dark-950 rounded-[11px] flex items-center justify-center font-mono font-bold text-lg text-white">
+                            PR
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-white tracking-tight text-base sm:text-lg leading-none flex items-center gap-2">
+                            Paduka Rafi
+                            <span class="text-amber-400 font-mono text-[11px] bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">18 Thn</span>
+                        </span>
+                        <span class="text-xs text-slate-400 font-mono mt-1">Wonosobo • Garage & Bot WA</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                    <a href="#home" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-all">Profil</a>
+                    <a href="#skills" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-all">Skill Jujur</a>
+                    <a href="#kalkulator" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-all">Hitung CC Mesin</a>
+                    <a href="#garapan" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-emerald-400 hover:bg-white/5 transition-all">Garapan</a>
+                    <a href="#terminal-section" onclick="focusTerminal()" class="px-3.5 py-2 rounded-lg text-sm font-mono text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-terminal text-xs"></i>Terminal
+                    </a>
+                </nav>
+
+                <!-- CTA Button Right -->
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#contact" class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-amber-500 to-emerald-500 text-dark-950 hover:brightness-110 transition-all shadow-lg shadow-amber-500/15 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>Kontak Saya</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" class="p-2.5 rounded-xl glass-card text-slate-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="mobile-menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/10 px-4 pt-3 pb-6 space-y-2">
+            <a href="#home" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/5">Profil</a>
+            <a href="#skills" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/5">Skill Jujur (80% Mekanik / 50% JS)</a>
+            <a href="#kalkulator" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-amber-400 hover:bg-amber-500/10">🔧 Kalkulator CC Mesin</a>
+            <a href="#garapan" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-medium text-slate-200 hover:bg-white/5">Daftar Garapan</a>
+            <a href="#terminal-section" onclick="focusTerminal()" class="mobile-link block px-4 py-2.5 rounded-xl text-base font-mono text-emerald-400 hover:bg-emerald-500/10">>_ Terminal Interaktif</a>
+            <div class="pt-2">
+                <a href="#contact" class="mobile-link w-full py-3 rounded-xl text-center font-semibold bg-gradient-to-r from-amber-500 to-emerald-500 text-dark-950 block">
+                    Hubungi via WA / Tele
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 pt-28 pb-20">
+
+        <!-- 1. HERO SECTION + INTERACTIVE TERMINAL -->
+        <section id="home" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 lg:py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+                
+                <!-- Left Column: Honest Bio & Intro -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <!-- Location & Age Badges -->
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border-amber-500/30 bg-amber-500/5">
+                            <i class="fa-solid fa-location-dot text-amber-400 text-xs"></i>
+                            <span class="text-xs sm:text-sm font-medium text-amber-200">Wonosobo, Jawa Tengah</span>
+                        </div>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border-emerald-500/30 bg-emerald-500/5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span class="text-xs sm:text-sm font-mono text-emerald-300">18 Tahun • Siap Garap</span>
+                        </div>
+                    </div>
+
+                    <!-- Greeting & Name -->
+                    <div class="space-y-2">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+                            Halo, Saya <br class="hidden sm:inline" />
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-emerald-400">Paduka Rafi</span>
+                        </h1>
+                        
+                        <!-- Dynamic / Typed Subtitle -->
+                        <div class="h-8 sm:h-10 flex items-center">
+                            <span class="font-mono text-sm sm:text-lg md:text-xl text-amber-400 font-medium typing-cursor" id="typed-subtitle">
+                                Mekanik Bebek & Matic • Oprek Bot WA
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Grounded, Realistic Bio -->
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                       .Bocah <span class="text-white font-semibold">18 tahun asal Wonosobo</span> yang Mempunyai ketertarikan dalam dunia otomotif dan coding: 
+                         pegang kunci & <span class="italic">baut</span> untuk service mesin motor <span class="text-amber-400 font-medium">Bebek & Matic</span>, 
+                        ngoprek script <span class="text-emerald-400 font-mono text-sm">Bot WhatsApp (zapo-js & Baileys)</span>. 
+                        Tujuan: motor enak & bot lancar.
+                    </p>
+
+                    <!-- Quick Honest Stats Bar -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1 max-w-xl">
+                        <!-- Mechanic Stat -->
+                        <div class="glass-card p-3.5 rounded-2xl border-l-4 border-l-amber-500">
+                            <div class="flex items-center justify-between text-xs font-mono mb-1.5">
+                                <span class="text-amber-400 font-bold flex items-center gap-1.5">
+                                    <i class="fa-solid fa-wrench"></i> MEKANIK MOTOR
+                                </span>
+                                <span class="text-white font-bold">80%</span>
+                            </div>
+                            <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-amber-500 to-orange-400 rounded-full" style="width: 80%"></div>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mt-1.5">Spesialis Bebek & Matic: Tune Up, Bore Up, Stroke Up, CVT</p>
+                        </div>
+
+                        <!-- JS Stat -->
+                        <div class="glass-card p-3.5 rounded-2xl border-l-4 border-l-emerald-500">
+                            <div class="flex items-center justify-between text-xs font-mono mb-1.5">
+                                <span class="text-emerald-400 font-bold flex items-center gap-1.5">
+                                    <i class="fa-brands fa-js"></i> JAVASCRIPT (BOT WA)
+                                </span>
+                                <span class="text-white font-bold">50%</span>
+                            </div>
+                            <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style="width: 50%"></div>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mt-1.5">Library zapo-js & Baileys, edit fitur plugin, run bot</p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap items-center gap-3.5 pt-2">
+                        <a href="https://wa.me/6283854944887" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl font-semibold bg-gradient-to-r from-amber-500 to-emerald-500 text-dark-950 hover:brightness-110 transition-all shadow-lg shadow-amber-500/20 flex items-center gap-2.5 text-sm sm:text-base">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Chat WA (0838-5494-4887)</span>
+                        </a>
+                        <a href="#kalkulator" class="px-5 py-3.5 rounded-xl font-semibold glass-card text-white hover:border-amber-500/50 hover:bg-white/10 transition-all flex items-center gap-2 text-sm sm:text-base">
+                            <i class="fa-solid fa-calculator text-amber-400"></i>
+                            <span>Kalkulator Bore Up</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Terminal (Kept & Customized!) -->
+                <div id="terminal-section" class="lg:col-span-5 w-full">
+                    <div class="glass-card rounded-2xl overflow-hidden border border-emerald-500/30 shadow-2xl shadow-black/60">
+                        <!-- Terminal Title Bar -->
+                        <div class="bg-dark-900/95 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                            </div>
+                            <div class="font-mono text-xs text-slate-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-terminal text-emerald-400"></i>
+                                <span>PadukaRafi: ~ (termux-zsh)</span>
+                            </div>
+                            <button onclick="runCommand('clear')" title="Bersihkan Terminal" class="text-xs font-mono text-slate-400 hover:text-white px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 transition-colors">
+                                clear
+                            </button>
+                        </div>
+
+                        <!-- Terminal Output Body -->
+                        <div id="terminal-body" class="p-4 sm:p-5 font-mono text-xs sm:text-sm h-80 overflow-y-auto terminal-scroll space-y-3 bg-dark-950/90" onclick="focusTerminal()">
+                            <div class="text-slate-400">
+                                <span class="text-amber-400 font-bold">node v1.8</span> — <span class="text-emerald-400">Rafi Garage & Bot CLI</span><br>
+                                Ketik <span class="text-amber-300 font-semibold">'help'</span> atau klik tombol di bawah untuk cek profil, spek bengkel, atau bot WA.
+                            </div>
+
+                            <div id="terminal-history" class="space-y-3">
+                                <!-- Initial pre-loaded command output -->
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-emerald-400 font-bold">rafi@wonosobo:~$</span>
+                                        <span class="text-white">whoami</span>
+                                    </div>
+                                    <div class="mt-1 text-slate-300 pl-3 border-l-2 border-amber-500/50 space-y-0.5">
+                                        <div>Nama   : <span class="text-white font-semibold">Paduka Rafi</span> (18 Tahun)</div>
+                                        <div>Lokasi : <span class="text-amber-300">Wonosobo, Jawa Tengah</span></div>
+                                        <div>Skill  : <span class="text-amber-400">Mekanik Motor (80%)</span> & <span class="text-emerald-400">JavaScript "Bot WA" (50%)</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Active Command Input Line -->
+                            <div class="flex items-center gap-2 pt-1">
+                                <span class="text-emerald-400 font-bold shrink-0">rafi@wonosobo:~$</span>
+                                <input 
+                                    type="text" 
+                                    id="terminal-input" 
+                                    class="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm caret-amber-400"
+                                    placeholder="Ketik 'help', 'bengkel', 'bot', 'skills'..."
+                                    autocomplete="off"
+                                    spellcheck="false"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Quick Command Chips -->
+                        <div class="bg-dark-900/95 px-4 py-3 border-t border-white/10">
+                            <div class="text-[11px] font-mono text-slate-400 mb-2 flex items-center justify-between">
+                                <span><i class="fa-solid fa-bolt text-amber-400 mr-1"></i>ShortCut:</span>
+                                <span class="text-emerald-400">Interactive CLI</span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="runCommand('help')" class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/5 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/20 transition-all">help</button>
+                                <button onclick="runCommand('whoami')" class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition-all">whoami</button>
+                                <button onclick="runCommand('bengkel')" class="px-2.5 py-1 rounded-md text-xs font-mono bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/25 transition-all">🔧 bengkel</button>
+                                <button onclick="runCommand('bot')" class="px-2.5 py-1 rounded-md text-xs font-mono bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/25 transition-all">🤖 bot</button>
+                                <button onclick="runCommand('skills')" class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition-all">skills</button>
+                                <button onclick="runCommand('cek-spek')" class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/5 hover:bg-amber-500/20 text-amber-200 border border-white/10 transition-all">cek-spek</button>
+                                <button onclick="runCommand('contact')" class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition-all">contact</button>
+                                <button onclick="runCommand('clear')" class="px-2.5 py-1 rounded-md text-xs font-mono bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/20 transition-all">clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. SKILL JUJUR SECTION (80% MEKANIK VS 50% JAVASCRIPT) -->
+        <section id="skills" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-amber-400 font-mono text-xs uppercase tracking-widest mb-2">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                        <span>Persentase</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Keahlian <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-emerald-400">Bengkel & Ngoding</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+                        tidak perlu dilebih-lebihkan. urusan bongkar bebek/matic sudah sehari-hari (80%), jika JavaScript fokus untuk recode bot WhatsApp (50%).
+                    </p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-2" id="skill-filters">
+                    <button onclick="filterSkills('all')" data-filter="all" class="skill-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-emerald-500 text-dark-950">
+                        Semua Skill
+                    </button>
+                    <button onclick="filterSkills('mekanik')" data-filter="mekanik" class="skill-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium glass-card text-amber-300 hover:bg-amber-500/10 transition-all">
+                        🔧 Mekanik Motor (80%)
+                    </button>
+                    <button onclick="filterSkills('coding')" data-filter="coding" class="skill-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium glass-card text-emerald-300 hover:bg-emerald-500/10 transition-all">
+                        💻 Bot WA & JS (50%)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Skills Grid Container -->
+            <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- 3. INTERACTIVE TOOL: KALKULATOR BORE UP / STROKE UP CC MESIN -->
+        <section id="kalkulator" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 border border-amber-500/30 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Left Explanation -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-xs">
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                            <span>Tools Bengkel</span>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">
+                            Kalkulator <span class="text-amber-400">Bore Up & Stroke Up</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Mau naik spek mesin harian touring atau semi-balap? Coba hitung kapasitas silinder (CC) motor bebek atau matic mu di sini pake rumus volume silinder:
+                        </p>
+                        <div class="p-3.5 rounded-xl bg-dark-950/90 border border-white/10 font-mono text-xs text-amber-300">
+                            CC = 0.7854 × (Diameter Piston)² × Langkah Piston ÷ 1000
+                        </div>
+                        <!-- Preset Spek Populer -->
+                        <div class="pt-2">
+                            <span class="block text-xs font-mono text-slate-400 mb-2">Klik contoh racikan populer:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="setEnginePreset(50, 55.1, 'Beat / Scoopy Standar (110cc)')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-amber-500/20 border border-white/10 text-xs font-mono text-slate-200 transition-all">
+                                    Beat Std (50×55.1)
+                                </button>
+                                <button onclick="setEnginePreset(54.5, 55.1, 'Beat Bore Up Harian (Piston 54.5mm)')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-amber-500/20 border border-white/10 text-xs font-mono text-amber-300 transition-all">
+                                    Beat 130cc (54.5×55.1)
+                                </button>
+                                <button onclick="setEnginePreset(57, 57.9, 'Mio / Jupiter Bore Up 150cc (Piston 57mm)')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-amber-500/20 border border-white/10 text-xs font-mono text-amber-300 transition-all">
+                                    Spek 150cc (57×57.9)
+                                </button>
+                                <button onclick="setEnginePreset(63, 64.2, 'Bore Up + Stroke Up 200cc')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-amber-500/20 border border-white/10 text-xs font-mono text-emerald-300 transition-all">
+                                    Spek 200cc (63×64.2)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Calculator Inputs & Result -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-dark-950/90 rounded-2xl p-5 sm:p-6 border border-white/10 space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-mono uppercase text-slate-400 mb-2">
+                                        Diameter Piston / Bore (mm)
+                                    </label>
+                                    <input type="number" step="0.1" id="input-bore" value="54.5" oninput="calculateCC()" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-white/15 text-white font-mono text-base focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono uppercase text-slate-400 mb-2">
+                                        Langkah / Stroke (mm)
+                                    </label>
+                                    <input type="number" step="0.1" id="input-stroke" value="55.1" oninput="calculateCC()" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-white/15 text-white font-mono text-base focus:outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+
+                            <!-- Result Display -->
+                            <div class="p-5 rounded-2xl bg-gradient-to-r from-amber-500/15 via-amber-500/5 to-emerald-500/10 border border-amber-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                <div>
+                                    <div class="text-xs font-mono text-amber-300 uppercase tracking-wider" id="calc-preset-label">Hasil Perhitungan Volume Silinder</div>
+                                    <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono mt-1">
+                                        <span id="result-cc">128.5</span> <span class="text-lg text-amber-400">CC</span>
+                                    </div>
+                                    <div class="text-xs text-slate-400 mt-1" id="calc-recommendation">
+                                        Cocok buat harian rasa touring, kompresi aman, gak gampang overheat.
+                                    </div>
+                                </div>
+                                <a href="#contact" onclick="prefillMechanicConsult()" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-dark-950 font-semibold text-xs font-mono shrink-0 text-center transition-all">
+                                    Tanya Racikan Ini →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. GARAPAN & OPREKAN SECTION (BENGKEL & BOT WA) -->
+        <section id="garapan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase tracking-widest mb-2">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        <span>Hasil Kerja Nyata</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Garapan <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-emerald-400">Mesin & Script Bot</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
+                       Setting karbu, racik kirian matic, skur klep atau service rutin sampai benerin code bot WhatsApp.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- 5. KONTAK ASLI SECTION -->
+        <section id="contact" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Column: Real Contact Cards -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-amber-400 font-mono text-xs uppercase tracking-widest mb-2">
+                            <i class="fa-solid fa-phone-volume"></i>
+                            <span>Kontak Saya (Aktif)</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                            Hubungi <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-emerald-400">Paduka Rafi</span>
+                        </h2>
+                        <p class="text-slate-400 text-sm sm:text-base mt-3 leading-relaxed">
+                            Mau tanya-tanya soal garap mesin motor (Tune Up / Bore Up / CVT), atau mau ngobrol soal bot WhatsApp (`zapo-js` & `Baileys`)? Langsung japri aja ke kontak di bawah ini.
+                        </p>
+                    </div>
+
+                    <!-- Contact List -->
+                    <div class="space-y-3.5">
+                        <!-- WhatsApp -->
+                        <div class="glass-card glass-card-hover p-4 rounded-2xl flex items-center justify-between">
+                            <a href="https://wa.me/6283854944887" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3.5 group">
+                                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 text-xl group-hover:scale-105 transition-transform">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-mono text-slate-400">WhatsApp (Fast Respon)</div>
+                                    <div class="text-sm sm:text-base font-bold text-white group-hover:text-emerald-400 transition-colors">083854944887</div>
+                                </div>
+                            </a>
+                            <button onclick="copyToClipboard('083854944887', 'Nomor WhatsApp')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/10 text-xs font-mono transition-all">
+                                <i class="fa-regular fa-copy mr-1"></i>Salin
+                            </button>
+                        </div>
+
+                        <!-- Telegram -->
+                        <div class="glass-card glass-card-hover p-4 rounded-2xl flex items-center justify-between">
+                            <a href="https://t.me/RafiCuy" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3.5 group">
+                                <div class="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400 text-xl group-hover:scale-105 transition-transform">
+                                    <i class="fa-brands fa-telegram"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-mono text-slate-400">Telegram</div>
+                                    <div class="text-sm sm:text-base font-bold text-white group-hover:text-cyan-400 transition-colors">t.me/RafiCuy</div>
+                                </div>
+                            </a>
+                            <button onclick="copyToClipboard('https://t.me/RafiCuy', 'Link Telegram')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-white/10 text-xs font-mono transition-all">
+                                <i class="fa-regular fa-copy mr-1"></i>Salin
+                            </button>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="glass-card glass-card-hover p-4 rounded-2xl flex items-center justify-between">
+                            <a href="mailto:rafisangar83@gmail.com" class="flex items-center gap-3.5 group">
+                                <div class="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400 text-xl group-hover:scale-105 transition-transform">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-mono text-slate-400">Email</div>
+                                    <div class="text-sm sm:text-base font-bold text-white group-hover:text-amber-400 transition-colors">rafisangar83@gmail.com</div>
+                                </div>
+                            </a>
+                            <button onclick="copyToClipboard('rafisangar83@gmail.com', 'Alamat Email')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-amber-500/20 text-slate-300 hover:text-amber-300 border border-white/10 text-xs font-mono transition-all">
+                                <i class="fa-regular fa-copy mr-1"></i>Salin
+                            </button>
+                        </div>
+
+                        <!-- Lokasi -->
+                        <div class="glass-card p-4 rounded-2xl flex items-center gap-3.5">
+                            <div class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-rose-400 text-xl">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-mono text-slate-400">Domisili</div>
+                                <div class="text-sm sm:text-base font-bold text-white">Wonosobo, Jawa Tengah</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Quick Direct WhatsApp Sender -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-white/10">
+                        <div class="flex items-center justify-between pb-5 mb-6 border-b border-white/10">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Kirim Chat Langsung ke WhatsApp Saya</h3>
+                                <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Isi singkat di bawah, otomatis teringrasi ke nomor saya.</p>
+                            </div>
+                            <span class="font-mono text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
+                                <i class="fa-brands fa-whatsapp mr-1"></i>Direct WA
+                            </span>
+                        </div>
+
+                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Nama Panggilan *</label>
+                                <input type="text" id="contact-name" required placeholder="Misal: Dimas / Mas Bro" class="w-full px-4 py-3 rounded-xl bg-dark-950/90 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 text-sm transition-colors">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Mau Bahas Apa? *</label>
+                                <select id="contact-subject" class="w-full px-4 py-3 rounded-xl bg-dark-950/90 border border-white/10 text-white focus:outline-none focus:border-amber-500 text-sm transition-colors">
+                                    <option value="Servis / Tune Up Motor Bebek & Matic">🔧 Servis / Tune Up Motor Bebek & Matic</option>
+                                    <option value="Konsultasi Bore Up / Stroke Up / Racik CVT">🔥 Konsultasi Bore Up / Stroke Up / Racik Kirian CVT</option>
+                                    <option value="Oprek Bot WhatsApp (zapo-js / Baileys)">🤖 Oprek Bot WhatsApp (zapo-js / Baileys)</option>
+                                    <option value="Kenalan">☕ Kenalan</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Pesan Singkat *</label>
+                                <textarea id="contact-message" rows="4" required placeholder="Tulis aja keluhan motor mu (misal: tarikan awal gredeg / mau bore up harian) atau tanya soal script bot WA..." class="w-full px-4 py-3 rounded-xl bg-dark-950/90 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 text-sm transition-colors resize-none"></textarea>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
+                                <button type="submit" class="w-full sm:w-auto flex-1 py-3.5 px-6 rounded-xl font-semibold bg-gradient-to-r from-amber-500 to-emerald-500 text-dark-950 hover:brightness-110 transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-sm">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    <span>Kirim ke WhatsApp Rafi</span>
+                                </button>
+                                <a href="https://t.me/RafiCuy" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto py-3.5 px-5 rounded-xl font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition-all flex items-center justify-center gap-2 text-sm">
+                                    <i class="fa-brands fa-telegram text-base"></i>
+                                    <span>Chat via Telegram</span>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/10 bg-dark-950/90 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center text-dark-950 font-mono font-bold text-xs">
+                    PR
+                </div>
+                <span class="text-sm text-slate-400">
+                    © <span id="current-year">2026</span> <strong class="text-white">Paduka Rafi</strong> (18 Thn) — Wonosobo, Jawa Tengah.
+                </span>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+                <span class="text-amber-400">🔧 Mekanik 80%</span>
+                <span>•</span>
+                <span class="text-emerald-400">💻 JS Bot 50%</span>
+                <span>•</span>
+                <a href="#home" class="hover:text-white transition-colors">Ke Atas ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-card border border-amber-500/40 bg-dark-900/95 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <div id="toast-title" class="text-xs font-mono text-amber-400 font-semibold">Mantap!</div>
+                <div id="toast-msg" class="text-xs sm:text-sm text-slate-200">Teks berhasil disalin.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // ==========================================
+        // 1. DATA SKILL JUJUR (80% MEKANIK & 50% JS)
+        // ==========================================
+        const skillsData = [
+            // Mekanik Motor (80% Core)
+            {
+                name: "Bore Up & Stroke Up Mesin",
+                category: "mekanik",
+                level: "20%",
+                tag: "Bebek & Matic",
+                icon: "fa-solid fa-fire-flame-curved",
+                accent: "amber",
+                context: "Ganti blok & piston oversize, naik langkah kruk as (stroke up), atur mendem piston & hitung rasio kompresi biar aman buat harian maupun turing."
+            },
+            {
+                name: "Tune Up & Setting Ruang Bakar",
+                category: "mekanik",
+                level: "100%",
+                tag: "Harian & Semi-Balap",
+                icon: "fa-solid fa-screwdriver-wrench",
+                accent: "amber",
+                context: "Stel celah klep pake, skur klep bocor, bersihin kerak ruang bakar, setting karburator (pilot jet/main jet) & throttle body injeksi."
+            },
+            {
+                name: "Racik Kirian / Upgrade CVT Matic",
+                category: "mekanik",
+                level: "70%",
+                tag: "Spesialis Matic",
+                icon: "fa-solid fa-gears",
+                accent: "amber",
+                context: "Atasi matic gredeg di tarikan awal, racik bobot roller rata/silang, per CVT & per sentri, plus bubut derajat & kerok jalur rumah roller."
+            },
+            {
+                name: "Kopling, Noken As & Kelistrikan",
+                category: "mekanik",
+                level: "20%",
+                tag: "Mesin Bebek",
+                icon: "fa-solid fa-bolt-lightning",
+                accent: "amber",
+                context: "Ganti kampas & per kopling motor bebek biar gak selip di tanjakan Wonosobo, papas noken as tipis-tipis, plus urut kabel pengapian/spul/kiprok."
+            },
+            // Coding & Bot WA (50% Core)
+            {
+                name: "Bot WhatsApp (zapo-js & Baileys)",
+                category: "coding",
+                level: "80%",
+                tag: "Library Utama",
+                icon: "fa-brands fa-whatsapp",
+                accent: "emerald",
+                context: "Pasang dan modifikasi script bot WA multi-device pake library zapo-js & Baileys, pairing code, urus session, dan beresin error koneksi."
+            },
+            {
+                name: "JavaScript Dasar & Edit Plugin Bot",
+                category: "coding",
+                level: "50%",
+                tag: "JavaScript 50%",
+                icon: "fa-brands fa-js",
+                accent: "emerald",
+                context: "Masih terus belajar. Bisa baca alur kode JS (ESM/CJS), tambah fitur command baru di bot, sambungin API downloader/stiker, & benerin bug ringan."
+            },
+            {
+                name: "Panel Pterodactyl",
+                category: "coding",
+                level: "65%",
+                tag: "Tempat Jalanin Bot",
+                icon: "fa-solid fa-terminal",
+                accent: "emerald",
+                context: "Deploy dan jalanin script bot 24 jam lewat panel Pterodactyl atau langsung ngoprek lewat aplikasi Termux di HP."
+            }
+        ];
+
+        // ==========================================
+        // 2. DATA GARAPAN (REALISTIC SHOWCASE)
+        // ==========================================
+        const garapanData = [
+            {
+                title: "Paket Bore Up Harian & Touring (Bebek / Matic)",
+                badge: "🔧 Garapan Bengkel",
+                accent: "amber",
+                description: "Naik kapasitas cc motor matic (Beat/Mio/Vario) atau bebek (Jupiter/Supra/Vega) buat ngejar torsi badak di jalanan menanjak Wonosobo tanpa bikin mesin cepet jebol.",
+                points: [
+                    "Ganti blok silinder & piston set + papas noken as sesuai spek",
+                    "Hitung ulang rasio kompresi biar tetep aman minum Pertamax / Pertalite",
+                    "Setting ulang basah/kering karburator atau kalibrasi sensor injeksi"
+                ],
+                tags: ["Bore Up", "Stroke Up", "Porting Halus", "Stel Klep"]
+            },
+            {
+                title: "Racikan CVT Anti-Gredeg & Napas Panjang",
+                badge: "🛵 Spesialis Matic",
+                accent: "amber",
+                description: "Beresin penyakit khas motor matic yang getar/gredeg pas angkatan awal sekaligus bikin tarikan bawah ke tengah lebih ngisi.",
+                points: [
+                    "Servis total area CVT, kampas ganda, dan mangkok kopling",
+                    "Kombinasi ukuran gram roller & tingkat kekerasan per CVT (1000/1500 RPM)",
+                    "Enak dipake boncengan nanjak ke arah Dieng tanpa ngempos"
+                ],
+                tags: ["Upgrade Kirian", "CVT Matic", "Roller", "Anti Gredeg"]
+            },
+            {
+                title: "Racik Bot WhatsApp Multi-Device (zapo-js & Baileys)",
+                badge: "🤖 Oprekan Bot WA",
+                accent: "emerald",
+                description: "Bikin dan ngerawat bot WhatsApp buat kebutuhan grup tongkrongan atau asisten pribadi pake library zapo-js dan Baileys.",
+                points: [
+                    "Fitur grup lengkap: welcome message, hidetag, kick/add, anti-link",
+                    "Fitur hiburan: bikin stiker WA otomatis, downloader TikTok/IG",
+                    "Bisa jalan stabil di Panel Pterodactyl maupun Termux HP"
+                ],
+                tags: ["zapo-js", "Baileys", "JavaScript 50%", "Node.js"]
+            },
+            {
+                title: "Tune Up Rutin & Beresin Mesin Brebet",
+                badge: "🛠️ Servis Harian",
+                accent: "amber",
+                description: "Perawatan motor harian biar suara mesin kembali halus, langsam stabil, bensin irit, dan enak dibawa kerja atau sekolah.",
+                points: [
+                    "Bongkar & cuci karburator / injektor + cek busi & filter udara",
+                    "Stel ulang kerenggangan klep in & ex sesuai ukuran standar/oprek",
+                    "Cek kelistrikan pengapian, aki, kiprok, dan ganti oli"
+                ],
+                tags: ["Tune Up", "Karburator", "Kelistrikan", "Bebek & Matic"]
+            }
+        ];
+
+        // ==========================================
+        // 3. RENDER FUNCTIONS
+        // ==========================================
+        function renderSkills(filter = 'all') {
+            const grid = document.getElementById('skills-grid');
+            const filtered = filter === 'all' 
+                ? skillsData 
+                : skillsData.filter(s => s.category === filter);
+
+            grid.innerHTML = filtered.map(skill => {
+                const isAmber = skill.accent === 'amber';
+                const badgeClass = isAmber 
+                    ? 'bg-amber-500/10 text-amber-400 border-amber-500/25' 
+                    : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25';
+                const barClass = isAmber
+                    ? 'from-amber-500 to-orange-400'
+                    : 'from-emerald-500 to-teal-400';
+
+                return `
+                    <div class="glass-card glass-card-hover rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-3 mb-3">
+                                <div class="w-11 h-11 rounded-xl ${badgeClass} border flex items-center justify-center text-lg shrink-0">
+                                    <i class="${skill.icon}"></i>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono border ${badgeClass}">
+                                    ${skill.tag}
+                                </span>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-1.5">${skill.name}</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                ${skill.context}
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono mb-1.5">
+                                <span class="text-slate-400">Penguasaan</span>
+                                <span class="text-white font-bold">${skill.level}</span>
+                            </div>
+                            <div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r ${barClass} rounded-full" style="width: ${skill.level}"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterSkills(category) {
+            document.querySelectorAll('.skill-tab').forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.className = "skill-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-gradient-to-r from-amber-500 to-emerald-500 text-dark-950";
+                } else {
+                    btn.className = "skill-tab px-4 py-2 rounded-xl text-xs sm:text-sm font-medium glass-card text-slate-300 hover:text-white transition-all";
+                }
+            });
+            renderSkills(category);
+        }
+
+        function renderGarapan() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = garapanData.map(item => {
+                const isAmber = item.accent === 'amber';
+                const badgeStyle = isAmber
+                    ? 'bg-amber-500/10 text-amber-300 border-amber-500/25'
+                    : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/25';
+                const checkColor = isAmber ? 'text-amber-400' : 'text-emerald-400';
+
+                return `
+                    <div class="glass-card glass-card-hover rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-lg text-xs font-mono border ${badgeStyle}">
+                                    ${item.badge}
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2.5">${item.title}</h3>
+                            <p class="text-sm text-slate-300 leading-relaxed mb-4">${item.description}</p>
+                            
+                            <ul class="space-y-2 mb-6 text-xs sm:text-sm text-slate-300">
+                                ${item.points.map(pt => `
+                                    <li class="flex items-start gap-2">
+                                        <i class="fa-solid fa-check ${checkColor} mt-1 shrink-0"></i>
+                                        <span>${pt}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10 flex flex-wrap gap-2">
+                            ${item.tags.map(t => `
+                                <span class="px-2.5 py-1 rounded-md bg-dark-950 border border-white/10 text-xs font-mono text-slate-400">
+                                    #${t}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ==========================================
+        // 4. KALKULATOR CC MESIN (BORE X STROKE)
+        // ==========================================
+        function calculateCC() {
+            const bore = parseFloat(document.getElementById('input-bore').value) || 0;
+            const stroke = parseFloat(document.getElementById('input-stroke').value) || 0;
+
+            // Rumus Volume Silinder: 0.7854 * D^2 * L / 1000
+            const cc = (0.785398 * bore * bore * stroke) / 1000;
+            const roundedCC = cc > 0 ? cc.toFixed(1) : "0.0";
+
+            document.getElementById('result-cc').textContent = roundedCC;
+
+            const recEl = document.getElementById('calc-recommendation');
+            if (cc < 115) {
+                recEl.textContent = "Spek standar harian: irit bensin, awet, tinggal tune up & servis CVT rutin.";
+            } else if (cc >= 115 && cc <= 140) {
+                recEl.textContent = "Spek Bore Up Harian / Touring: tarikan bawah-tengah padat, aman buat nanjak Wonosobo-Dieng.";
+            } else if (cc > 140 && cc <= 175) {
+                recEl.textContent = "Spek Semi-Balap / Touring Jauh: wajib perhatikan debit bensin (karbu/injektor) & pendinginan mesin.";
+            } else {
+                recEl.textContent = "Spek Extreme Bore/Stroke Up: kompresi & pengapian wajib dihitung matang biar mesin gak jebol!";
+            }
+        }
+
+        function setEnginePreset(bore, stroke, label) {
+            document.getElementById('input-bore').value = bore;
+            document.getElementById('input-stroke').value = stroke;
+            document.getElementById('calc-preset-label').textContent = label;
+            calculateCC();
+        }
+
+        function prefillMechanicConsult() {
+            const bore = document.getElementById('input-bore').value;
+            const stroke = document.getElementById('input-stroke').value;
+            const cc = document.getElementById('result-cc').textContent;
+            document.getElementById('contact-subject').value = "Konsultasi Bore Up / Stroke Up / Racik CVT";
+            document.getElementById('contact-message').value = `Bro Rafi, mau tanya soal racikan mesin piston ${bore}mm x langkah ${stroke}mm (sekitar ${cc} CC). Kira-kira aman gak buat harian?`;
+        }
+
+        // ==========================================
+        // 5. INTERACTIVE TERMINAL LOGIC (CUSTOMIZED)
+        // ==========================================
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalHistory = document.getElementById('terminal-history');
+        const terminalBody = document.getElementById('terminal-body');
+
+        function focusTerminal() {
+            terminalInput.focus();
+        }
+
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const rawCmd = this.value.trim();
+                if (rawCmd) {
+                    runCommand(rawCmd);
+                }
+                this.value = '';
+            }
+        });
+
+        function runCommand(cmdText) {
+            const cmd = cmdText.toLowerCase().trim();
+
+            if (cmd === 'clear' || cmd === 'cls') {
+                terminalHistory.innerHTML = '';
+                return;
+            }
+
+            let outputHTML = '';
+
+            switch (cmd) {
+                case 'help':
+                    outputHTML = `
+                        <div class="text-slate-300 space-y-1">
+                            <div class="text-amber-400 font-semibold">Perintah Terminal RafiOS:</div>
+                            <div><span class="text-emerald-300 w-20 inline-block">whoami</span> — Biodata singkat Paduka Rafi</div>
+                            <div><span class="text-emerald-300 w-20 inline-block">skills</span> — Lihat bar persentase jujur (Mekanik vs JS)</div>
+                            <div><span class="text-emerald-300 w-20 inline-block">bengkel</span> — Info garapan motor Bebek & Matic</div>
+                            <div><span class="text-emerald-300 w-20 inline-block">bot</span> — Info oprekan Bot WA (zapo-js & Baileys)</div>
+                            <div><span class="text-emerald-300 w-20 inline-block">cek-spek</span> — Contoh rumus bore up favorit</div>
+                            <div><span class="text-emerald-300 w-20 inline-block">contact</span> — Nomor WA, Telegram, & Email asli</div>
+                            <div><span class="text-emerald-300 w-20 inline-block">clear</span> — Bersihkan layar terminal</div>
+                        </div>
+                    `;
+                    break;
+
+                case 'whoami':
+                    outputHTML = `
+                        <div class="text-slate-300 space-y-0.5">
+                            <div>Nama     : <span class="text-white font-bold">Paduka Rafi</span></div>
+                            <div>Umur     : <span class="text-amber-300">18 Tahun</span></div>
+                            <div>Lokasi   : <span class="text-emerald-300">Wonosobo, Jawa Tengah</span></div>
+                            <div>Kerjaan  : Mekanik Sepeda Motor (Bebek & Matic) + Ngoprek Bot WA</div>
+                        </div>
+                    `;
+                    break;
+
+                case 'skills':
+                    outputHTML = `
+                        <div class="text-slate-300 space-y-1.5">
+                            <div>
+                                <div class="text-amber-400">🔧 Mekanik Motor (Tune Up / Bore Up / Stroke Up / CVT) : 80%</div>
+                                <div class="text-amber-300 font-mono">[████████████████░░░░] 80%</div>
+                            </div>
+                            <div>
+                                <div class="text-emerald-400">💻 JavaScript & Bot WA (zapo-js & Baileys) : 50%</div>
+                                <div class="text-emerald-300 font-mono">[██████████░░░░░░░░░░] 50%</div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'bengkel':
+                    outputHTML = `
+                        <div class="text-slate-300 space-y-1">
+                            <div class="text-amber-400 font-bold">Garapan Spesialis Bebek & Matic:</div>
+                            <div>• <span class="text-white">Tune Up:</span> Stel klep, bersihin karbu/injeksi, skir klep, servis rutin.</div>
+                            <div>• <span class="text-white">Bore Up & Stroke Up:</span> Ganti blok/piston oversize, naik langkah, atur kompresi.</div>
+                            <div>• <span class="text-white">Kirian Matic:</span> Racik roller, per CVT/sentri, hilangkan gredeg.</div>
+                        </div>
+                    `;
+                    break;
+
+                case 'bot':
+                    outputHTML = `
+                        <div class="text-slate-300 space-y-1">
+                            <div class="text-emerald-400 font-bold">Oprekan Bot WhatsApp:</div>
+                            <div>• <span class="text-white">Library:</span> zapo-js & @whiskeysockets/baileys</div>
+                            <div>• <span class="text-white">Bahasa:</span> JavaScript Node.js (Masih level 50%, sambil terus belajar)</div>
+                            <div>• <span class="text-white">Fitur:</span> Jaga grup, stiker otomatis, downloader, jalan di Termux/Panel.</div>
+                        </div>
+                    `;
+                    break;
+
+                case 'cek-spek':
+                    outputHTML = `
+                        <div class="text-slate-300 space-y-1">
+                            <div class="text-amber-300">[Simulasi Bore Up Harian Beat/Scoopy]</div>
+                            <div>Piston 54.5mm × Stroke 55.1mm = <span class="text-white font-bold">128.5 CC</span></div>
+                            <div class="text-xs text-slate-400">→ Coba hitung spek motor mu sendiri di menu "Hitung CC Mesin" di bawah!</div>
+                        </div>
+                    `;
+                    break;
+
+                case 'contact':
+                    outputHTML = `
+                        <div class="text-slate-300 space-y-1">
+                            <div>• WhatsApp : <a href="https://wa.me/6283854944887" target="_blank" class="text-emerald-400 underline">083854944887</a></div>
+                            <div>• Telegram : <a href="https://t.me/RafiCuy" target="_blank" class="text-cyan-400 underline">t.me/RafiCuy</a></div>
+                            <div>• Email    : <span class="text-amber-300">rafisangar83@gmail.com</span></div>
+                        </div>
+                    `;
+                    break;
+
+                default:
+                    outputHTML = `
+                        <div class="text-rose-400">
+                            Perintah <span class="text-white">'${escapeHtml(cmdText)}'</span> gak ketemu bro. Ketik <span class="text-amber-300">'help'</span> buat lihat daftar perintah.
+                        </div>
+                    `;
+            }
+
+            const block = document.createElement('div');
+            block.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">rafi@wonosobo:~$</span>
+                    <span class="text-white">${escapeHtml(cmdText)}</span>
+                </div>
+                <div class="mt-1 pl-3 border-l-2 border-amber-500/40">
+                    ${outputHTML}
+                </div>
+            `;
+            terminalHistory.appendChild(block);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                return ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                })[m];
+            });
+        }
+
+        // ==========================================
+        // 6. TYPING EFFECT SUBTITLE
+        // ==========================================
+        const subtitles = [
+            "Mekanik Bebek & Matic (80%)",
+            "Tune Up • Bore Up • Stroke Up",
+            "Oprek Bot WA zapo-js & Baileys (50%)",
+            "Wonosobo, Jawa Tengah"
+        ];
+        let subIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typedEl = document.getElementById('typed-subtitle');
+
+        function typeLoop() {
+            const currentText = subtitles[subIndex];
+            if (isDeleting) {
+                typedEl.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedEl.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? 35 : 70;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                subIndex = (subIndex + 1) % subtitles.length;
+                speed = 400;
+            }
+
+            setTimeout(typeLoop, speed);
+        }
+
+        // ==========================================
+        // 7. DIRECT WHATSAPP & CLIPBOARD
+        // ==========================================
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value.trim();
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value.trim();
+
+            const waText = `Halo 👋\n\n*Nama:* ${name}\n*Keperluan:* ${subject}\n*Pesan:* ${message}`;
+            const encoded = encodeURIComponent(waText);
+            window.open(`https://wa.me/6283854944887?text=${encoded}`, '_blank');
+        }
+
+        function copyToClipboard(text, label) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Berhasil Disalin!', `${label} (${text}) udah disalin.`);
+            } catch (err) {
+                showToast('Info', `Salin manual: ${text}`);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        let toastTimeout;
+        function showToast(title, msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-msg').textContent = msg;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-xmark text-xl text-amber-400';
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-bars text-xl';
+            }
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-bars text-xl';
+            });
+        });
+
+        window.onload = function() {
+            renderSkills('all');
+            renderGarapan();
+            calculateCC();
+            setTimeout(typeLoop, 900);
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        };
+    </script>
+</body>
+</html>
